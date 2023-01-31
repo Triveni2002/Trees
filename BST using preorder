@@ -1,0 +1,14 @@
+class Solution {
+    public TreeNode bstFromPreorder(int[] preorder) {
+        return bstPre(preorder,Integer.MAX_VALUE,new int[]{0});
+    }
+    public TreeNode bstPre(int a[],int b,int[] i){
+        if(i[0]==a.length || a[i[0]]>b){
+            return null;
+        }
+        TreeNode root = new TreeNode(a[i[0]++]);
+        root.left=bstPre(a,root.val,i);
+        root.right=bstPre(a,b,i);
+        return root;
+    }
+}
