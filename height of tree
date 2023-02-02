@@ -1,0 +1,25 @@
+public static int height(Node root) {
+      	// Write your code here.
+         Queue<Node> q=new LinkedList<Node>();
+         List<List<Integer>> li=new LinkedList<List<Integer>>();
+        q.offer(root);
+        if(root==null){
+            return li.size();
+        }
+        while(!q.isEmpty()){
+            int n=q.size();
+            List<Integer> l=new ArrayList<>();
+            for(int i=0;i<n;i++){
+                if(q.peek().left!=null){
+                    q.offer(q.peek().left);
+                }
+                 if(q.peek().right!=null){
+                    q.offer(q.peek().right);
+                }
+                l.add(q.poll().data);
+            }
+            li.add(l);
+            
+        }
+        return li.size()-1;
+    }
