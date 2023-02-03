@@ -1,0 +1,50 @@
+class Solution {
+    public void pre(TreeNode root,List<Integer> l){
+        if(root==null)return;
+        l.add(root.val);
+        pre(root.left,l);
+        pre(root.right,l);
+
+    }
+    public List<Integer> preorderTraversal(TreeNode root){
+        ArrayList<Integer> a=new ArrayList<>();
+       
+        pre(root,a);
+        return a;
+    }
+    public int maxi(HashMap<Integer,Integer> map){
+        int maxFre=0;
+        for(int i:map.keySet())
+            maxFre=Math.max(maxFre,map.get(i));
+        return maxFre;
+    }
+    public int[] findMode(TreeNode root) {
+        List<Integer> m=preorderTraversal(root);
+         HashMap<Integer, Integer> h=new HashMap<Integer, Integer>() ;
+        for(int i=0;i<m.size();i++) {
+            h.put(m.get(i),h.getOrDefault(m.get(i),0)+1) ;
+        }
+         HashSet<Integer> hashSet = new HashSet<>(m);
+         List<Integer> d=new ArrayList<>();
+         int[] orig=new int[hashSet.size()];
+         int k=0;
+         for (Integer value : hashSet){
+             orig[k]=value;
+             k++;
+         }
+         int me=maxi(h);
+        for (Integer value : hashSet) {
+            if(h.get(value)==me){
+                d.add(value);
+            }
+        }
+        int[] a=new int[d.size()];
+        for(int i=0;i<d.size();i++){
+            a[i]=d.get(i);
+        }
+        if(a.length==0){
+            return orig;
+        }
+        return a;
+    }
+}
